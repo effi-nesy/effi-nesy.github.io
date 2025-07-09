@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Efficient Processing of Neuro-Symbolic AI: A Software-Hardware Co-Design Tutorial</title>
+    
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EWSWCE7MTD"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EWSWCE7MTD');
+    </script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f8f8f8; color: #222; }
+        header { color: #222; padding: 2rem 1rem 1rem 1rem; text-align: center; }
+        h1 { margin: 0 0 0.5rem 0; }
+        .authors, .affiliation { margin: 0.5rem 0; }
+        .container { max-width: 1200px; margin: 2rem auto; background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);}
+        section { margin-bottom: 2rem; }
+        h2 { color: #003366; border-bottom: 1px solid #eee; padding-bottom: 0.3rem; }
+        ul { padding-left: 1.2rem; }
+        .footer { text-align: center; color: #888; font-size: 0.9rem; margin: 2rem 0 1rem 0; }
+        .news-date { color: #666; font-size: 0.95em; margin-right: 0.5em; }
+        a { color: #0000FF; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .authors a { color: #0000FF; font-size: 1.2em; }
+        .authors a:hover { color: #003366; text-decoration: underline; }
+        .affiliation { font-size: 1.2em; }
+        .authors sup { font-size: 0.8em; }
+        .affiliation sup { font-size: 0.7em; }
+        .paper-table { width: 100%; border: 0px; border-spacing: 0px; border-collapse: separate; margin-right: auto; margin-left: auto; }
+        .paper-table td { vertical-align: top; }
+        .paper-image { text-align: center; }
+        .paper-content { padding-left: 20px; }
+        papertitle { font-weight: bold; font-size: 1.1em; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Efficient Processing of Neuro-Symbolic AI: A Tutorial and Co-Design Case Study</h1><br>
+        <div class="authors">
+            <a href="https://zishenwan.github.io/">Zishen Wan</a><sup>1</sup>, 
+            <a href="https://scholar.google.com/citations?user=_zZGO-4AAAAJ&hl=en" target="_blank">Che-Kai Liu</a><sup>1</sup>, 
+            <a href="https://scholar.google.com/citations?hl=en&user=zoMQ8CoAAAAJ" target="_blank">Hanchen Yang</a><sup>1</sup>, 
+            <a href="https://scholar.google.com/citations?hl=en&user=I8kUcx4AAAAJ" target="_blank">Ritik Raj</a><sup>1</sup>,
+            <a href="https://jiayi-19.github.io/" target="_blank">Jiayi Qian</a><sup>1</sup>,
+            <a href="https://anands09.github.io" target="_blank">Ananda Samajdar</a><sup>2</sup>,<br>
+            <a href="https://scholar.google.com/citations?user=lXUce-0AAAAJ&hl=en" target="_blank">Arijit Raychowdhury</a><sup>1</sup>,
+            <a href="https://scholar.google.com/citations?hl=en&user=P__ztgcAAAAJ" target="_blank">Tushar Krishna</a><sup>1</sup>
+        </div>
+        <div class="affiliation">
+            <sup>1</sup>Georgia Institute of Technology, <sup>2</sup>IBM Research
+        </div>
+    </header>
+    <div class="container">
+        <section>
+            <h2>Recent News</h2>
+            <ul>
+                <li><span class="news-date">06/25/2025</span>Our paper "Compositional AI Beyond LLMs: System Implications of Neuro-Symbolic-Probabilistic Architecture" accepted to <strong>ASPLOS 2026</strong>.</li>
+                <li><span class="news-date">04/15/2025</span>Our tutorial paper "Efficient Processing of Neuro-Symbolic AI: A Tutorial and Cross-Layer Co-Design Case Study" accepted to <strong>NeuS 2025</strong>. [<a href="https://neus-2025.github.io/files/papers/paper_68.pdf">PDF</a>]</li>
+                <li><span class="news-date">03/03/2025</span>Our paper "Generative AI in Embodied Systems: System-Level Analysis of Performance, Efficiency and Scalability" accepted to <strong>ISPASS 2025</strong>. [<a href="https://arxiv.org/pdf/2504.18945">PDF</a>]</li>
+                <li><span class="news-date">02/15/2025</span>Our paper "NSFlow: An End-to-End FPGA Framework with Scalable Dataflow Architecture for Neuro-Symbolic AI" accepted to <strong>DAC 2025</strong>. [<a href="https://arxiv.org/pdf/2504.19323">PDF</a>]</li>
+                <li><span class="news-date">01/29/2025</span>Our paper "ReCA: Integrated Acceleration for Real-Time and Efficient Cooperative Embodied Autonomous Agents" accepted to <strong>ASPLOS 2025</strong>. [<a href="https://dl.acm.org/doi/pdf/10.1145/3676641.3716016">PDF</a>]</li>
+                <li><span class="news-date">11/02/2024</span>Our paper "CogSys: Efficient and Scalable Neurosymbolic Cognition System via Algorithm-Hardware Co-Design" accepted to <strong>HPCA 2025</strong>. [<a href="https://arxiv.org/pdf/2503.01162">PDF</a>]</li>
+                <li><span class="news-date">08/04/2024</span>Our invited paper "Towards Efficient Neuro-Symbolic AI: From Workload Characterization to Hardware Architecture" accepted to <strong>TCASAI</strong>. [<a href="https://zishenwan.github.io/publication/TCASAI24.pdf">PDF</a>]</li>
+                <li><span class="news-date">07/01/2024</span>Our special session "Neuro-Symbolic Architecture Meets Large Language Models: A Memory-Centric Perspective" accepted to <strong>ESWEEK 2024</strong>. [<a href="https://zishenwan.github.io/publication/ESWEEK24_NSAI_LLM.pdf">PDF</a>]</li>
+                <li><span class="news-date">02/29/2024</span>Our paper "Towards Cognitive AI Systems: Workload and Characterization of Neuro-Symbolic AI" accepted to <strong>ISPASS 2024</strong>. [<a href="https://zishenwan.github.io/publication/ISPASS24_NSAI.pdf">PDF</a>]</li>
+                <li><span class="news-date">11/07/2023</span>Our paper "H3DFACT: Heterogeneous 3D Integrated CIM for Factorization with Holographic Perceptual Representations" accepted to <strong>DATE 2024</strong>. [<a href="https://arxiv.org/pdf/2404.04173.pdf">PDF</a>]</li>
+                <li><span class="news-date">04/10/2023</span>Our paper "HTowards Cognitive AI Systems: a Survey and Prospective on Neuro-Symbolic AI" accepted to <strong>SNAP workshop</strong> at <strong>MLSys 2023</strong>. [<a href="https://arxiv.org/pdf/2401.01040">PDF</a>]</li>
+            </ul>
+        </section>
+        <section>
+            <h2>Recent Talks</h2>
+            <ul>
+                <li><span class="news-date">07/11/2025</span> "Demystifying Neuro-Symbolic AI for Software-Hardware Co-Design" at Purdue University, West Lafayette, IN.</li>
+                <li><span class="news-date">07/10/2025</span> "Demystifying Neuro-Symbolic AI for Software-Hardware Co-Design" at University of Notre Dame, South Bend, IN.</li>
+                <li><span class="news-date">06/24/2025</span> "Tailored Computing: Domain-Specific Hardware and Systems for Embodied Cognitive Intelligence" at DAC PhD Forum, San Francisco, CA. [<a href="https://zishenwan.github.io/publication/DAC_PhD_Forum_Poster_Zishen_Wan.pdf">Slide</a>]</li>
+                <li><span class="news-date">06/24/2025</span> "NSFlow: An End-to-End FPGA Framework with Scalable Dataflow Architecture for Neuro-Symbolic AI" at DAC, San Francisco, CA. [<a href="https://zishenwan.github.io/publication/DAC25_NSFlow_Slide">Slide</a>]</li>
+                <li><span class="news-date">06/21/2025</span> "Efficient and Safe Embodied Intelligence: From Benchmarking to Co-Design" at ISCA Arch4EAI Workshop, Tokyo, Japan. [<a href="https://docs.google.com/presentation/d/1qnYi0ZFcN51e6u8QLhAqyv_bZt_xWSfQOVxnkDSfuiM/edit?usp=sharing">Slide</a>]</li>
+                <li><span class="news-date">05/30/2025</span> "Efficient Processing of Neuro-Symbolic AI: A Tutorial and Co-Design Case Study" at NeuS, University of Pennsylvania, Philadelphia, PA.</li>
+                <li><span class="news-date">05/11/2025</span> "Generative AI in Embodied Systems: System-Level Analysis of Performance, Efficiency and Scalability" at ISPASS, Ghent, Belgium. [<a href="https://zishenwan.github.io/publication/2025-05-12_ISPASS25_Embodied_AI_slide.pdf">Slide</a>]</li>
+                <li><span class="news-date">04/17/2025</span> "Demystifying Neuro-Symbolic AI for Software-Hardware Co-Design" at Google, Mountain View, CA. [<a href="https://zishenwan.github.io/publication/2025-04-17_Google_Neurosymbolic.pdf">Slide</a>]</li>
+                <li><span class="news-date">04/02/2025</span> "ReCA: Integrated Acceleration for Real-Time and Efficient Cooperative Embodied Autonomous Agents" at ASPLOS, Rotterdam, the Netherlands. [<a href="https://zishenwan.github.io/publication/2025-04-02_ASPLOS25_ReCA_slide.pdf">Slide</a>]</li>
+                <li><span class="news-date">03/31/2025</span> "Demystifying Neuro-Symbolic AI for Software-Hardware Co-Design" at ASPLOS MLBench Workshop, Rotterdam, the Netherlands. [<a href="https://zishenwan.github.io/publication/2025-03-30_ASPLOS_MLBench_Neurosymbolic.pdf">Slide</a>]</li> 
+                <li><span class="news-date">03/22/2025</span> "Bridging Learning and Reasoning: A Cross-Layer Software-Architecture-FPGA-SoC Approach for Neuro-Symbolic AI" at DRRPA JUMP2.0 CoCoSys Annual Review, Atlanta, GA.</li>
+                <li><span class="news-date">03/13/2025</span> "Programmable Silicon Prototyping for Various Neuro-Symbolic Models" at CoCoSys Industry Meeting, Atlanta, GA.</li>
+                <li><span class="news-date">03/04/2025</span> "CogSys: Efficient and Scalable Neurosymbolic Cognition System via Algorithm-Hardware Co-Design AI" at HPCA, Las Vegas, NV. [<a href="https://zishenwan.github.io/publication/2025-03-04_HPCA_Cogsys_Talk.pdf">Slide</a>]</li>
+                <li><span class="news-date">03/01/2024</span> "Towards Cognitive AI Systems: Workload and Characterization of Neuro-Symbolic AI" at HPCA MLBench Workshop, Las Vegas, NV. [<a href="https://zishenwan.github.io/publication/2025-03-30_ASPLOS_MLBench_Neurosymbolic.pdf">Slide</a>]</li>
+                <li><span class="news-date">02/25/2025</span> "Tailored Computing: Domain-Specific Hardware and Systems for Embodied Cognitive Intelligence" at UIUC, Urbana-Champaign, IL. [<a href="https://zishenwan.github.io/publication/2025-02-25_UIUC_Seminar.pdf">Slide</a>]</li>
+                <li><span class="news-date">02/13/2025</span> "CogSys: Efficient and Scalable Neurosymbolic Cognition System via Algorithm-Hardware Co-Design AI" at CRNCH Summit, Atlanta, GA.</li>
+                <li><span class="news-date">02/03/2025</span> "Tailored Computing: Domain-Specific Hardware and Systems for Embodied Cognitive Intelligence" at University of Washington, Seattle, WA. [<a href="https://zishenwan.github.io/publication/2025-02-25_UIUC_Seminar.pdf">Slide</a>]</li>
+                <li><span class="news-date">01/28/2025</span> "Towards Cognitive AI Systems: Workload and Characterization of Neuro-Symbolic AI", guest lecture at Georgia Tech, Atlanta, GA. [<a href="https://zishenwan.github.io/publication/ECE8893_Neurosymbolic_Guest_Lecture.pdf">Slide</a>]</li>
+                <li><span class="news-date">01/24/2025</span> "Demystifying Neuro-Symbolic AI for Software-Hardware Co-Design" at Georgia Tech Computer Architecture Research Seminar, Atlanta, GA.</li>
+                <li><span class="news-date">11/15/2024</span> "System-Architecture-Technology Cross-Layer Design for Embodied and Cognitive Intelligence" at Harvard University, Cambridge, MA.</li> 
+                <li><span class="news-date">11/07/2024</span> "Tailored Computing: Domain-Specific Hardware and Systems for Embodied Cognitive Intelligence" at University of Central Florida, Orlando, FL. [<a href="https://zishenwan.github.io/publication/2025-02-25_UIUC_Seminar.pdf">Slide</a>]</li> 
+                <li><span class="news-date">11/05/2024</span> "Efficient and Scalable Neurosymbolic System via Algorithm-Hardware Co-Design" at ACM Student Research Competiton, MICRO, Austin, TX. [<a href="https://zishenwan.github.io/publication/2025-03-04_HPCA_Cogsys_Talk.pdf">Slide</a>]</li> 
+                <li><span class="news-date">11/03/2024</span> "Intelligence in Embodied Systems: Cross-Layer Co-Design for Intelligent Autonomous Machines" at MICRO RoboArch Workshop, Austin, TX. [<a href="https://zishenwan.github.io/publication/MICRO24_RoboArch_Slide.pdf">Slide</a>]</li> 
+                <li><span class="news-date">10/01/2024</span> "Neuro-Symbolic Architecture Meets Large Language Models: A Memory-Centric Perspective" at ESWEEK, Raleigh, NC. [<a href="https://zishenwan.github.io/publication/ESWEEK24_slide.pdf">Slide</a>]</li> 
+                <li><span class="news-date">09/09/2024</span> "H3DFACT: Heterogeneous 3D Integrated CIM for Factorization with Holographic Perceptual Representations" at SRC TECHCON, Austin, TX. [<a href="https://zishenwan.github.io/publication/DATE24_H3DFact_Slide.pdf">Slide</a>]</li>
+                <li><span class="news-date">08/15/2024</span> "Towards Cognitive AI Systems: Workload and Characterization of Neuro-Symbolic AI" at University of Minnesota, Minneapolis, MN. [<a href="https://zishenwan.github.io/publication/ISPASS24_NSAI_Slide.pdf">Slide</a>]</li>
+                <li><span class="news-date">05/07/2024</span> "Towards Cognitive AI Systems: Workload and Characterization of Neuro-Symbolic AI" at ISPASS, Indianapolis, IN. [<a href="https://zishenwan.github.io/publication/ISPASS24_NSAI_Slide.pdf">Slide</a>]</li>
+                <li><span class="news-date">04/27/2024</span> "Towards Cognitive AI Systems: Workload and Characterization of Neuro-Symbolic AI" at ASPLOS EMC2 Workshop, San Diego, CA. [<a href="https://zishenwan.github.io/publication/ISPASS24_NSAI_Slide.pdf">Slide</a>]</li>
+                <li><span class="news-date">03/22/2024</span> "H3DFACT: Heterogeneous 3D Integrated CIM for Factorization with Holographic Perceptual Representations" at DATE, Valencia, Spain. [<a href="https://zishenwan.github.io/publication/DATE24_H3DFact_Slide.pdf">Slide</a>]</li>
+            
+            </ul>
+        </section>
+        <section>
+            <h2>Abstract</h2>
+            <p>
+                Neuro-symbolic AI presents an emerging compositional paradigm that fuses neural learning with symbolic reasoning and probabilistic inference to enhance the transparency, interpretability, and trustworthiness of AI solutions for complex real-world tasks. However, achieving real-time, energy-efficient, and scalable deployment of neuro-symbolic intelligence requires cross-disciplinary integration through application discovery, systems thinking, and co-design intelligence.
+            <p>              
+                We take a vertically-integrated approach to enabling efficient and scalable neuro-symbolic computing, from workload benchmarking, hardware architecture, to FPGA prototyping and SoC tapeout [<a href="https://neus-2025.github.io/files/papers/paper_68.pdf">NeuS'25</a>]. 
+                First, we conduct workload characterization to uncover key system behavior of neuro-symbolic [<a href="https://zishenwan.github.io/publication/ISPASS24_NSAI.pdf">ISPASS'24</a>] and compositonal LLM-symbolic-probabilistic [<a href="https://effi-nesy.github.io/">ASPLOS'26</a>] models. 
+                Second, we build reconfigurable processing unit and dataflow architecture for neuro-symbolic computing [<a href="https://arxiv.org/pdf/2503.01162">HPCA'25</a>]. 
+                Third, we develop end-to-end framework with automated architecture generator for agile neuro-symbolic FPGA deployment [<a href="https://arxiv.org/pdf/2504.19323">DAC'25</a>]. 
+                Finally, we tape out a 40nm programmable heterogeneous SoC chip with integrated RRAM/SRAM datapath, scheduler-informed power management, and programming support for neuro-symbolic AI models. 
+                Through this synergistic cross-layer co-design, we demonstrate the feasibility of deploying efficient neuro-symbolic cognitive systems at scale.
+            </p>
+                We also explore employing neuro-symbolic computing in embodied AI systems by integrating high-level planning-reasoning and low-level perception-control modules. 
+                Through system characterization [<a href="https://arxiv.org/pdf/2504.18945">ISPASS'25</a>] and development of dual memory system, hierarchical cooperation, and heterogeneous SoC architecture [<a href="https://dl.acm.org/doi/pdf/10.1145/3676641.3716016">ASPLOS'25</a>], we aim to build more efficient and intelligent human-cognition-like physical AI systems that can better perceive, understand, reason, and interact with the complex real world.
+            <p>
+
+            </p>
+        </section>
+        <section>
+            <h2>Related Papers</h2>
+            <table class="paper-table"><tbody>
+                <tr onmouseout="ff_stop()" onmouseover="ff_start()">
+                    <td class="paper-image" style="width:20%;">
+                        <div class="one"><img src='https://zishenwan.github.io/images/NeuS25.png' width="200"></div>
+                        <script type="text/javascript">
+                            function ff_start() {
+                                document.getElementById('ff_image').style.opacity = "1";
+                            }
+                            function ff_stop() {
+                                document.getElementById('ff_image').style.opacity = "0";
+                            }
+                            ff_stop()
+                        </script>
+                    </td>
+                    <td class="paper-content" style="width:80%;">
+                        <papertitle>Efficient Processing of Neuro-Symbolic AI: A Tutorial and Co-Design Case Study</papertitle>
+                        <br>
+                        <a href="https://zishenwan.github.io/">Zishen Wan</a>,
+                        <a href="https://che-kai.github.io/">Che-Kai Liu</a>,
+                        <a href="https://scholar.google.com/citations?user=zoMQ8CoAAAAJ&hl=en">Hanchen Yang</a>,
+                        <a href="https://scholar.google.com/citations?user=I8kUcx4AAAAJ&hl=en">Ritik Raj</a>,
+                        <a href="https://scholar.google.com/citations?user=Uug6p-AAAAAJ&hl=en">Arijit Raychowdhury</a>,
+                        <a href="https://scholar.google.com/citations?user=P__ztgcAAAAJ&hl=en">Tushar Krishna</a>
+                        <br>
+                        <em>International Conference on Neuro-symbolic Systems (<strong>NeuS</strong>)</em>, 2025
+                        <br><font color="red"><strong>Selected as Oral Presentation</strong></font><br>
+                        <a href="https://neus-2025.github.io/files/papers/paper_68.pdf">Paper</a>
+                        <br>
+                        <p></p>
+                        <p>This work presents our vertically integrated approach to enabling efficient and scalable neuro-symbolic computing—spanning workload benchmarking, hardware architecture, FPGA prototyping, and SoC tapeout. Through this cross-layer design, we demonstrate the feasibility of neuro-symbolic cognitive systems at scale. </p>
+                    </td>
+                </tr>
+            </tbody></table>
+            <h3>Workload Characterization</h3>
+            <table class="paper-table"><tbody>
+                <tr onmouseout="uflow_stop()" onmouseover="uflow_start()">
+                    <td class="paper-image" style="width:20%;">
+                        <div class="one"><img src='https://zishenwan.github.io/images/ISPASS24_NSAI.png' width="200"></div>
+                        <script type="text/javascript">
+                            function uflow_start() {
+                                document.getElementById('uflow_image').style.opacity = "1";
+                            }
+                            function uflow_stop() {
+                                document.getElementById('uflow_image').style.opacity = "0";
+                            }
+                            uflow_stop()
+                        </script>
+                    </td>
+                    <td class="paper-content" style="width:80%;">
+                        <papertitle>Towards Cognitive AI Systems: Workload and Characterization of Neuro-Symbolic AI</papertitle>
+                        <br>
+                        <a href="https://zishenwan.github.io/">Zishen Wan</a>,
+                        <a href="https://che-kai.github.io/">Che-Kai Liu</a>,
+                        <a href="https://www.linkedin.com/in/hancheny/">Hanchen Yang</a>,
+                        <a href="https://www.linkedin.com/in/ritik-raj-04810b17b/">Ritik Raj</a>,
+                        <a href="https://licj15.github.io">Chaojian Li</a>,
+                        <a href="https://www.haoranyou.com">Haoran You</a>,
+                        <a href="https://www.yongganfu.com">Yonggan Fu</a>,
+                        <a href="https://sites.cc.gatech.edu/~cwan39/">Cheng Wan</a>,
+                        <a href="https://anands09.github.io">Ananda Samajdar</a>,
+                        <a href="https://eiclab.scs.gatech.edu/pages/team.html">Yingyan (Celine) Lin</a>,
+                        <a href="https://scholar.google.com/citations?user=P__ztgcAAAAJ&hl=en">Tushar Krishna</a>,
+                        <a href="https://scholar.google.com/citations?hl=en&user=lXUce-0AAAAJ">Arijit Raychowdhury</a>
+                        <br>
+                        <em>IEEE International Symposium on Performance Analysis of Systems and Software (<strong>ISPASS</strong>)</em>, 2024
+                        <br><font color="red"><strong>Best Poster Award, DARPA SRC JUMP2.0 CoCoSys Center 2024</strong></font><br>
+                        <a href="https://zishenwan.github.io/publication/ISPASS24_NSAI.pdf">Paper</a> / <a href="https://zishenwan.github.io/publication/ISPASS24_NSAI_Slide.pdf">Slide</a> / <a href="https://ece.gatech.edu/news/2024/03/cocosys-holds-second-annual-review">Media</a>
+                        <br>
+                        <p></p>
+                        <p>We systematically categorize neuro-symbolic AI workloads, conduct workload characterizations across hardware platforms, and identify cross-layer optimization opportunites for neuro-symbolic systems.</p>
+                        <br>
+                    </td>
+                </tr>
+            </tbody></table>          
+            <h3>Hardware Architecture</h3>
+            <table class="paper-table"><tbody>
+                <tr onmouseout="ff_stop()" onmouseover="ff_start()">
+                    <td class="paper-image" style="width:20%;">
+                        <div class="one"><img src='https://zishenwan.github.io/images/HPCA25_CogSys.png' width="200"></div>
+                        <script type="text/javascript">
+                            function ff_start() {
+                                document.getElementById('ff_image').style.opacity = "1";
+                            }
+                            function ff_stop() {
+                                document.getElementById('ff_image').style.opacity = "0";
+                            }
+                            ff_stop()
+                        </script>
+                    </td>
+                    <td class="paper-content" style="width:80%;">
+                        <papertitle>CogSys: Efficient and Scalable Neurosymbolic Cognition System via Algorithm-Hardware Co-Design</papertitle>
+                        <br>
+                        <a href="https://zishenwan.github.io/">Zishen Wan*</a>,
+                        <a href="https://scholar.google.com/citations?user=zoMQ8CoAAAAJ&hl=en">Hanchen Yang*</a>,
+                        <a href="https://scholar.google.com/citations?user=I8kUcx4AAAAJ&hl=en">Ritik Raj*</a>,
+                        <a href="https://che-kai.github.io/">Che-Kai Liu</a>,
+                        <a href="https://anands09.github.io">Ananda Samajdar</a>,
+                        <a href="https://scholar.google.com/citations?user=Uug6p-AAAAAJ&hl=en">Arijit Raychowdhury</a>,
+                        <a href="https://scholar.google.com/citations?user=P__ztgcAAAAJ&hl=en">Tushar Krishna</a>
+                        <br>
+                        <em>International Symposium on High-Performance Computer Architecture (<strong>HPCA</strong>)</em>, 2025
+                        <br><font color="red"><strong>Best Paper Award, DARPA SRC JUMP 2.0, 2024</strong></font><br>
+                        <a href="https://arxiv.org/pdf/2503.01162">Paper</a> / 
+                        <a href="https://zishenwan.github.io/publication/2025-03-04_HPCA_Cogsys_Talk.pdf">Slide</a> / 
+                        <a href="https://zishenwan.github.io/publication/2025-03-30_ASPLOS_MLBench_Neurosymbolic.pdf">Slide (long version)</a> / 
+                        <a href="https://zishenwan.github.io/publication/HPCA25_CogSys_poster.pdf">Poster</a> / 
+                        <a href="https://ece.gatech.edu/news/2025/05/cocosys-develops-groundbreaking-neuro-symbolic-ai-chip">Media</a>
+                        <br>
+                        <p></p>
+                        <p>We propose CogSys, a characterization and co-design framework dedicated to neurosymbolic AI system acceleration, aiming to win both reasoning efficiency and scalability.</p>
+                        <br>
+                    </td>
+                </tr>
+
+                <tr onmouseout="ff_stop()" onmouseover="ff_start()">
+                    <td class="paper-image" style="width:20%;">
+                        <div class="one"><img src='https://zishenwan.github.io/images/DAC25_NSFlow.png' width="200"></div>
+                        <script type="text/javascript">
+                            function ff_start() {
+                                document.getElementById('ff_image').style.opacity = "1";
+                            }
+                            function ff_stop() {
+                                document.getElementById('ff_image').style.opacity = "0";
+                            }
+                            ff_stop()
+                        </script>
+                    </td>
+                    <td class="paper-content" style="width:80%;">
+                        <papertitle>NSFlow: An End-to-End FPGA Framework with Scalable Dataflow Architecture for Neuro-Symbolic AI</papertitle>
+                        <br>
+                        <a href="https://scholar.google.com/citations?user=zoMQ8CoAAAAJ&hl=en">Hanchen Yang*</a>,
+                        <a href="https://zishenwan.github.io/">Zishen Wan*</a>,
+                        <a href="https://scholar.google.com/citations?user=I8kUcx4AAAAJ&hl=en">Ritik Raj</a>,
+                        <a href="https://sites.google.com/casys.kaist.ac.kr/jupark/">Joongun Park</a>,
+                        <a href="https://www.linkedin.com/in/ziwei-li-gt/">Ziwei Li</a>,
+                        <a href="https://anands09.github.io">Ananda Samajdar</a>,
+                        <a href="https://scholar.google.com/citations?user=Uug6p-AAAAAJ&hl=en">Arijit Raychowdhury</a>,
+                        <a href="https://scholar.google.com/citations?user=P__ztgcAAAAJ&hl=en">Tushar Krishna</a>
+                        <br>
+                        <em>ACM/IEEE Design Automation Conference (<strong>DAC</strong>)</em>, 2025
+                        <br>
+                        <a href="https://arxiv.org/pdf/2504.19323">Paper</a> / 
+                        <a href="https://zishenwan.github.io/publication/DAC25_NSFlow_Slide">Slide</a>
+                        <br>
+                        <p></p>
+                        <p>We propose NSFlow, an FPGA framework for efficient, scalable, and adaptive across neuro-symbolic systems. NSFlow features a design architecture generator that identifies workload data dependencies and creates dataflow architectures, as well as reconfigurable array with flexible compute units and re-organizable memory. </p>
+                        <br> 
+                    </td>
+                </tr>
+
+                <tr onmouseout="uflow_stop()" onmouseover="uflow_start()">
+                    <td class="paper-image" style="width:20%;">
+                        <div class="one"><img src='https://zishenwan.github.io/images/TCASAI_NSAI.png' width="200"></div>
+                        <script type="text/javascript">
+                            function uflow_start() {
+                                document.getElementById('uflow_image').style.opacity = "1";
+                            }
+                            function uflow_stop() {
+                                document.getElementById('uflow_image').style.opacity = "0";
+                            }
+                            uflow_stop()
+                        </script>
+                    </td>
+                    <td class="paper-content" style="width:80%;">
+                        <papertitle>Towards Efficient Neuro-Symbolic AI: From Workload Characterization to Hardware Architecture</papertitle>
+                        <br>
+                        <a href="https://zishenwan.github.io/">Zishen Wan</a>,
+                        <a href="https://che-kai.github.io/">Che-Kai Liu</a>,
+                        <a href="https://www.linkedin.com/in/hancheny/">Hanchen Yang</a>,
+                        <a href="https://www.linkedin.com/in/ritik-raj-04810b17b/">Ritik Raj</a>,
+                        <a href="https://licj15.github.io">Chaojian Li</a>,
+                        <a href="https://www.haoranyou.com">Haoran You</a>,
+                        <a href="https://www.yongganfu.com">Yonggan Fu</a>,
+                        <a href="https://sites.cc.gatech.edu/~cwan39/">Cheng Wan</a>,
+                        <a href="http://lisixu.dev/">Sixu Li</a>,
+                        <a href="https://scholar.google.com/citations?user=PpnL_0AAAAJ&hl=en">Youbin Kim</a>,
+                        <a href="https://anands09.github.io">Ananda Samajdar</a>,
+                        <a href="https://eiclab.scs.gatech.edu/pages/team.html">Yingyan (Celine) Lin</a>,
+                        <a href="https://mohamed-s-ibrahim.github.io">Mohamed Ibrahim</a>,
+                        <a href="https://www.janrabaey.com">Jan M. Rabaey</a>,
+                        <a href="https://scholar.google.com/citations?user=P__ztgcAAAAJ&hl=en">Tushar Krishna</a>,
+                        <a href="https://scholar.google.com/citations?hl=en&user=lXUce-0AAAAJ">Arijit Raychowdhury</a>
+                        <br>
+                        <em>IEEE Transactions on Circuits and Systems for Artificial Intelligence (<strong>TCASAI</strong>)</em>, 2024
+                        <br><font color="red"><strong>Best Paper Award, DARPA SRC JUMP 2.0, 2024</strong></font><br>
+                        <a href="https://zishenwan.github.io/publication/TCASAI24.pdf">Paper</a> / 
+                        <a href="https://fortune.com/2024/12/09/neurosymbolic-ai-deep-learning-symbolic-reasoning-reliability/?khp389">Fortune News</a> / 
+                        <a href="https://cocosys.ece.gatech.edu/2024/12/10/zishen-wan-research-scholar-spotlight-2/">CoCoSys News</a>
+                        <br>
+                        <p></p>
+                        <p>We analyze the neuro-symbolic workload chracteristics, and present a hardware acceleration case study for vector-symbolic architecture to improve the performance, efficiency, and scalability of neuro-symbolic computing.</p>
+                        <br>
+                    </td>
+                </tr>
+
+                <tr onmouseout="ff_stop()" onmouseover="ff_start()">
+                    <td class="paper-image" style="width:20%;">
+                        <div class="one"><img src='https://zishenwan.github.io/images/DATE24.png' width="200"></div>
+                        <script type="text/javascript">
+                            function ff_start() {
+                                document.getElementById('ff_image').style.opacity = "1";
+                            }
+                            function ff_stop() {
+                                document.getElementById('ff_image').style.opacity = "0";
+                            }
+                            ff_stop()
+                        </script>
+                    </td>
+                    <td class="paper-content" style="width:80%;">
+                        <papertitle>H3DFACT: Heterogeneous 3D Integrated CIM for Factorization with Holographic Perceptual Representations</papertitle>
+                        <br>
+                        <a href="https://zishenwan.github.io/">Zishen Wan*</a>,
+                        <a href="https://che-kai.github.io">Che-Kai Liu*</a>,
+                        <a href="https://mohamed-s-ibrahim.github.io">Mohamed Ibrahim</a>,
+                        <a href="https://www.linkedin.com/in/hancheny/">Hanchen Yang</a>,
+                        <a href="https://scholar.google.com/citations?user=pp2eO7UAAAAJ&hl=en">Samuel Spetalnick</a>,
+                        <a href="https://scholar.google.com/citations?user=P__ztgcAAAAJ&hl=en">Tushar Krishna</a>,      
+                        <a href="https://scholar.google.com/citations?user=Uug6p-AAAAAJ&hl=en">Arijit Raychowdhury</a>
+                        <br>
+                        <em>Design, Automation and Test in Europe Conference (<strong>DATE</strong>)</em>, 2024
+                        <br><font color="red"><strong>Best Presentation Award, SRC TECHCON 2024</strong></font><br>
+                        <a href="https://arxiv.org/pdf/2404.04173.pdf">Paper</a> /
+                        <a href="https://zishenwan.github.io/publication/DATE24_H3DFact_Slide.pdf">Slide</a> / 
+                        <a href="https://www.src.org/calendar/e007205/">SRC News</a> / 
+                        <a href="https://ece.gatech.edu/news/2024/10/ece-students-take-home-top-honors-techcon-2024">GT News</a>
+                        <br>
+                        <p></p>
+                        <p>We present H3DFACT, the first heterogeneous 3D integrated in-memory compute engine capable of efficiently factorizing high-dimensional holographic representations towards next-generative cognitive AI.</p>
+                        <br>
+                    </td>
+                </tr>
+
+                <tr onmouseout="ff_stop()" onmouseover="ff_start()">
+                    <td class="paper-image" style="width:20%;">
+                        <div class="one"><img src='https://zishenwan.github.io/images/ESWEEK24.png' width="200"></div>
+                        <script type="text/javascript">
+                            function ff_start() {
+                                document.getElementById('ff_image').style.opacity = "1";
+                            }
+                            function ff_stop() {
+                                document.getElementById('ff_image').style.opacity = "0";
+                            }
+                            ff_stop()
+                        </script>
+                    </td>
+                    <td class="paper-content" style="width:80%;">
+                        <papertitle>Neuro-Symbolic Architecture Meets Large Language Models: A Memory-Centric Perspective</papertitle>
+                        <br>
+                        <a href="https://mohamed-s-ibrahim.github.io">Mohamed Ibrahim</a>,
+                        <a href="https://zishenwan.github.io/">Zishen Wan</a>,
+                        <a href="https://engineering.purdue.edu/~haitongl/">Haitong Li</a>,
+                        <a href="https://scholar.google.com/citations?user=qA5WsYUAAAAJ&hl=en">Priyadarshini Panda</a>,
+                        <a href="https://scholar.google.com/citations?user=P__ztgcAAAAJ&hl=en">Tushar Krishna</a>,
+                        <a href="https://redwood.berkeley.edu/people/pentti-kanerva/">Pentti Kanerva</a>,
+                        <a href="https://scholar.google.com.sg/citations?user=3G-nnjMAAAAJ&hl=en">Yiran Chen</a>,
+                        <a href="https://scholar.google.com/citations?user=Uug6p-AAAAAJ&hl=en">Arijit Raychowdhury</a>
+                        <br>
+                        <em>ACM/IEEE Embedded Systems Week (<strong>ESWEEK</strong>)</em>, 2024
+                        <br>
+                        <a href="https://zishenwan.github.io/publication/ESWEEK24_NSAI_LLM.pdf">Paper</a> / <a href="https://zishenwan.github.io/publication/ESWEEK24_slide.pdf">Slide</a>
+                        <br>
+                        <p></p>
+                        <p>We analyze the computational chanllenges of integrating LLMs and neuro-symbolic architecture, and explore state-of-the-art solutions, focusing on the memory-centric computing principles at both algorithmic and hardware levels.</p>
+                        <br>
+                    </td>
+                </tr>
+            </tbody></table>
+            <h3>Embodied System Deployment</h3>
+            <table class="paper-table"><tbody>
+                <tr onmouseout="ff_stop()" onmouseover="ff_start()">
+                    <td class="paper-image" style="width:20%;">
+                        <div class="one"><img src='https://zishenwan.github.io/images/ASPLOS25_ReCA.png' width="200"></div>
+                        <script type="text/javascript">
+                            function ff_start() {
+                                document.getElementById('ff_image').style.opacity = "1";
+                            }
+                            function ff_stop() {
+                                document.getElementById('ff_image').style.opacity = "0";
+                            }
+                            ff_stop()
+                        </script>
+                    </td>
+                    <td class="paper-content" style="width:80%;">
+                        <papertitle>ReCA: Integrated Acceleration for Real-Time and Efficient Cooperative Embodied Autonomous Agents</papertitle>
+                        <br>
+                        <a href="https://zishenwan.github.io">Zishen Wan</a>,
+                        <a href="https://zishenwan.github.io">Yuhang Du</a>,
+                        <a href="https://mohamed-s-ibrahim.github.io">Mohamed Ibrahim</a>,
+                        <a href="https://www.linkedin.com/in/jiayi-qian-988848294/">Jiayi Qian</a>,
+                        <a href="http://jabbourjason.com">Jason Jabbour</a>,
+                        <a href="https://www.yangkatiezhao.net">Yang (Katie) Zhao</a>,
+                        <a href="https://scholar.google.com/citations?user=P__ztgcAAAAJ&hl=en">Tushar Krishna</a>,
+                        <a href="https://scholar.google.com/citations?user=Uug6p-AAAAAJ&hl=en">Arijit Raychowdhury</a>,
+                        <a href="https://scholar.google.com/citations?user=gy4UVGcAAAAJ&hl=en">Vijay Janapa Reddi</a>
+                        <br>
+                        <em>ACM Inter Conf on Architectural Support for Programming Languages and Operating Systems (<strong>ASPLOS</strong>)</em>, 2025
+                        <br><font color="red"><strong>Selected as IAP Highlight</strong></font><br>
+                        <a href="https://dl.acm.org/doi/pdf/10.1145/3676641.3716016">Paper</a> /
+                        <a href="https://zishenwan.github.io/publication/2025-04-02_ASPLOS25_ReCA_slide.pdf">Slide</a> /
+                        <a href="https://docs.google.com/presentation/d/1qnYi0ZFcN51e6u8QLhAqyv_bZt_xWSfQOVxnkDSfuiM/edit?usp=sharing">Slide (long version)</a> /
+                        <a href="https://zishenwan.github.io/publication/ASPLOS25_ReCA_Poster.pdf">Poster</a>
+                        <br>
+                        <p></p>
+                        <p>We propose ReCA, a characterization and system-architecture co-design framework dedicated to cooperative embodied AI agent system acceleration, aiming to enhance both long-horizon multi-objective planning task efficiency and system scalability. </p>
+                        <br>
+                    </td>
+                </tr>
+                <tr onmouseout="ff_stop()" onmouseover="ff_start()">
+                    <td class="paper-image" style="width:20%;">
+                        <div class="one"><img src='https://zishenwan.github.io/images/ISPASS25_EmbodiedPerf.png' width="200"></div>
+                        <script type="text/javascript">
+                            function ff_start() {
+                                document.getElementById('ff_image').style.opacity = "1";
+                            }
+                            function ff_stop() {
+                                document.getElementById('ff_image').style.opacity = "0";
+                            }
+                            ff_stop()
+                        </script>
+                    </td>
+                    <td class="paper-content" style="width:80%;">
+                        <papertitle>Generative AI in Embodied Systems: System-Level Analysis of Performance, Efficiency and Scalability</papertitle>
+                        <br>
+                        <a href="https://zishenwan.github.io">Zishen Wan</a>,
+                        <a href="https://www.linkedin.com/in/jiayi-qian-988848294/">Jiayi Qian</a>,
+                        <a href="https://zishenwan.github.io">Yuhang Du</a>,
+                        <a href="http://jabbourjason.com">Jason Jabbour</a>,
+                        <a href="https://yilundu.github.io">Yilun Du</a>,
+                        <a href="https://www.yangkatiezhao.net">Yang (Katie) Zhao</a>,
+                        <a href="https://scholar.google.com/citations?user=Uug6p-AAAAAJ&hl=en">Arijit Raychowdhury</a>,
+                        <a href="https://scholar.google.com/citations?user=P__ztgcAAAAJ&hl=en">Tushar Krishna</a>,
+                        <a href="https://scholar.google.com/citations?user=gy4UVGcAAAAJ&hl=en">Vijay Janapa Reddi</a>
+                        <br>
+                        <em>IEEE International Symposium on Performance Analysis of Systems and Software (<strong>ISPASS</strong>)</em>, 2025
+                        <br>
+                        <a href="https://arxiv.org/pdf/2504.18945">Paper</a> / <a href="https://zishenwan.github.io/publication/2025-05-12_ISPASS25_Embodied_AI_slide.pdf">Slide</a>
+                        <br>
+                        <p></p>
+                        <p>This paper systematically categorizes the workload characteristics of embodied agent systems and presents a benchmark suite to evaluate their task performance and system efficiency, suggests system optimization strategies to improve the performance, efficiency, and scalability of future embodied system design. </p>
+                        <br>
+                    </td>
+                </tr>
+            </tbody></table>
+        </section>
+        <section>
+            <h2>Media Coverage</h2>
+            <ul>
+                <li> <a href="https://ece.gatech.edu/news/2025/05/cocosys-develops-groundbreaking-neuro-symbolic-ai-chip">Georgia Tech News</a>: CoCoSys Develops Groundbreaking Neuro-Symbolic AI Chip (05/2025)</li>
+                <li> <a href="https://fortune.com/2024/12/09/neurosymbolic-ai-deep-learning-symbolic-reasoning-reliability/?khp389">Fortune News</a>: Generative AI can’t shake its reliability problem, some say ‘neurosymbolic AI’ is the answer (12/2024)</li>
+                <li> <a href="https://cocosys.ece.gatech.edu/2024/12/10/zishen-wan-research-scholar-spotlight-2/">CoCoSys News</a>: Research Scholar Spotlight from DARPAR SRC JUMP2.0 Program (12/2024)</li>
+            </ul>
+        </section>
+        <section>
+            <h2>Acknowledgement</h2>
+            <p>
+                This work was supported in part by <a href="https://cocosys.ece.gatech.edu/" target="_blank">CoCoSys</a>, one of seven centers in JUMP 2.0, a Semiconductor Research Corporation (SRC) program sponsored by DARPA.
+            </p>
+        </section>
+    </div>
+    <div class="footer">
+        &copy; Zishen Wan 2025</a>
+    </div>
+</body>
+</html> 
