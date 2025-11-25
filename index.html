@@ -66,6 +66,7 @@
         <section>
             <h2>Recent News</h2>
             <ul>
+                <li><span class="news-date">11/07/2025</span>Our paper "REASON: Accelerating Probabilistic Logical Reasoning for Neuro-Symbolic Cognitive Intelligence" accepted to <strong>HPCA 2026</strong>.</li>
                 <li><span class="news-date">06/25/2025</span>Our paper "Compositional AI Beyond LLMs: System Implications of Neuro-Symbolic-Probabilistic Architecture" accepted to <strong>ASPLOS 2026</strong>.</li>
                 <li><span class="news-date">04/15/2025</span>Our tutorial paper "Efficient Processing of Neuro-Symbolic AI: A Tutorial and Cross-Layer Co-Design Case Study" accepted to <strong>NeuS 2025</strong>. [<a href="https://neus-2025.github.io/files/papers/paper_68.pdf">PDF</a>]</li>
                 <li><span class="news-date">03/03/2025</span>Our paper "Generative AI in Embodied Systems: System-Level Analysis of Performance, Efficiency and Scalability" accepted to <strong>ISPASS 2025</strong>. [<a href="https://arxiv.org/pdf/2504.18945">PDF</a>]</li>
@@ -122,7 +123,7 @@
             <p>              
                 We take a vertically-integrated approach to enabling efficient and scalable neuro-symbolic computing, from workload benchmarking, hardware architecture, to FPGA prototyping and SoC tapeout [<a href="https://neus-2025.github.io/files/papers/paper_68.pdf">NeuS'25</a>]. 
                 First, we conduct workload characterization to uncover key system behavior of neuro-symbolic [<a href="https://zishenwan.github.io/publication/ISPASS24_NSAI.pdf">ISPASS'24</a>] and compositional LLM-symbolic-probabilistic [<a href="https://effi-nesy.github.io/">ASPLOS'26</a>] models. 
-                Second, we build reconfigurable processing unit and dataflow architecture for neuro-symbolic computing [<a href="https://arxiv.org/pdf/2503.01162">HPCA'25</a>]. 
+                Second, we perform system optimization and build processing elements and dataflow architecture for neuro-symbolic computing [<a href="https://arxiv.org/pdf/2503.01162">HPCA'25</a>] and compositional LLM-symbolic-probabilistic computing [<a href="https://effi-nesy.github.io/">HPCA'26</a>]. 
                 Third, we develop end-to-end framework with automated architecture generator for agile neuro-symbolic FPGA deployment [<a href="https://arxiv.org/pdf/2504.19323">DAC'25</a>]. 
                 Finally, we tape out a programmable heterogeneous SoC chip with integrated RRAM/SRAM datapath, scheduler-informed power management, and programming support for neuro-symbolic AI models. 
                 Through this synergistic cross-layer co-design, we demonstrate the feasibility of deploying efficient neuro-symbolic cognitive systems at scale.
@@ -169,41 +170,6 @@
             </tbody></table>
             <h3>Workload Characterization</h3>
             <table class="paper-table"><tbody>
-                <tr onmouseout="ff_stop()" onmouseover="ff_start()">
-                    <tr onmouseout="ff_stop()" onmouseover="ff_start()">
-                        <td class="paper-image" style="width:20%;">
-                            <div class="one"><img src='https://zishenwan.github.io/images/ASPLOS26_NSAI.png' width="200"></div>
-                            <script type="text/javascript">
-                                function ff_start() {
-                                    document.getElementById('ff_image').style.opacity = "1";
-                                }
-                                function ff_stop() {
-                                    document.getElementById('ff_image').style.opacity = "0";
-                                }
-                                ff_stop()
-                            </script>
-                        </td>
-                        <td class="paper-content" style="width:80%;">
-                            <papertitle>Compositional AI Beyond LLMs: System Implications of Neuro-Symbolic-Probabilistic Architectures</papertitle>
-                            <br>
-                            <a href="https://zishenwan.github.io/">Zishen Wan</a>,
-                            <a href="https://scholar.google.com/citations?user=zoMQ8CoAAAAJ&hl=en">Hanchen Yang</a>,
-                            <a href="https://scholar.google.com/citations?user=I8kUcx4AAAAJ&hl=en">Ritik Raj</a>,
-                            <a href="https://sites.google.com/casys.kaist.ac.kr/jupark/">Joongun Park</a>,
-                            <a href="https://scholar.google.com/citations?user=QI96hfoAAAAJ&hl=en">Chenyu Wang</a>,
-                            <a href="https://scholar.google.com/citations?user=Uug6p-AAAAAJ&hl=en">Arijit Raychowdhury</a>,
-                            <a href="https://scholar.google.com/citations?user=P__ztgcAAAAJ&hl=en">Tushar Krishna</a>
-                            <br>
-                            <em>ACM Inter Conf on Architectural Support for Programming Languages and Operating Systems (<strong>ASPLOS</strong>)</em>, 2026
-                            <br>
-                            Paper (To appear)
-                            <br>
-                            <p></p>
-                            <p>Compositional AI integrates LLMs, symbolic, and probabilistic modules to enhance interpretability, robustness, and trustworthiness for cognitive applications. This paper presents a comprehensive system-level analysis of neuro-symbolic-probabilistic AI and reveals its key performance characteristics.</p>
-                            <br> 
-                        </td>
-                    </tr>
-               
                 <tr onmouseout="uflow_stop()" onmouseover="uflow_start()">
                     <td class="paper-image" style="width:20%;">
                         <div class="one"><img src='https://zishenwan.github.io/images/ISPASS24_NSAI.png' width="200"></div>
@@ -242,9 +208,79 @@
                         <br>
                     </td>
                 </tr>
-            </tbody></table>          
+            </tbody></table>    
+            
+            <h3>System Optimization</h3>
+            <table class="paper-table"><tbody>
+                <tr onmouseout="ff_stop()" onmouseover="ff_start()">
+                    <tr onmouseout="ff_stop()" onmouseover="ff_start()">
+                        <td class="paper-image" style="width:20%;">
+                            <div class="one"><img src='https://zishenwan.github.io/images/ASPLOS26_NSAI.png' width="200"></div>
+                            <script type="text/javascript">
+                                function ff_start() {
+                                    document.getElementById('ff_image').style.opacity = "1";
+                                }
+                                function ff_stop() {
+                                    document.getElementById('ff_image').style.opacity = "0";
+                                }
+                                ff_stop()
+                            </script>
+                        </td>
+                        <td class="paper-content" style="width:80%;">
+                            <papertitle>Compositional AI Beyond LLMs: System Implications of Neuro-Symbolic-Probabilistic Architectures</papertitle>
+                            <br>
+                            <a href="https://zishenwan.github.io/">Zishen Wan</a>,
+                            <a href="https://scholar.google.com/citations?user=zoMQ8CoAAAAJ&hl=en">Hanchen Yang</a>,
+                            <a href="https://scholar.google.com/citations?user=I8kUcx4AAAAJ&hl=en">Ritik Raj</a>,
+                            <a href="https://sites.google.com/casys.kaist.ac.kr/jupark/">Joongun Park</a>,
+                            <a href="https://scholar.google.com/citations?user=QI96hfoAAAAJ&hl=en">Chenyu Wang</a>,
+                            <a href="https://scholar.google.com/citations?user=Uug6p-AAAAAJ&hl=en">Arijit Raychowdhury</a>,
+                            <a href="https://scholar.google.com/citations?user=P__ztgcAAAAJ&hl=en">Tushar Krishna</a>
+                            <br>
+                            <em>ACM Inter Conf on Architectural Support for Programming Languages and Operating Systems (<strong>ASPLOS</strong>)</em>, 2026
+                            <br>
+                            Paper (To appear)
+                            <br>
+                            <p></p>
+                            <p>Compositional AI integrates LLMs, symbolic, and probabilistic modules to enhance interpretability, robustness, and trustworthiness for cognitive applications. This paper presents a comprehensive system-level analysis of neuro-symbolic-probabilistic AI and reveals its key performance characteristics.</p>
+                            <br> 
+                        </td>
+                    </tr>
+                </tbody></table>   
+
             <h3>Hardware Architecture</h3>
             <table class="paper-table"><tbody>
+                <tr onmouseout="ff_stop()" onmouseover="ff_start()">
+                    <td class="paper-image" style="width:20%;">
+                        <div class="one"><img src='https://zishenwan.github.io/images/HPCA26_REASON.png' width="190"></div>
+                        <script type="text/javascript">
+                            function ff_start() {
+                                document.getElementById('ff_image').style.opacity = "1";
+                            }
+                            function ff_stop() {
+                                document.getElementById('ff_image').style.opacity = "0";
+                            }
+                            ff_stop()
+                        </script>
+                    </td>
+                    <td class="paper-content" style="width:80%;">
+                        <papertitle>REASON: Accelerating Probabilistic Logical Reasoning for Neuro-Symbolic Cognitive Intelligence</papertitle>
+                        <br>
+                        <strong>Zishen Wan</strong>,
+                        <a href="https://scholar.google.com/citations?user=_zZGO-4AAAAJ&hl=en">Che-Kai Liu</a>,
+                        <a href="https://jiayi-19.github.io/">Jiayi Qian</a>,
+                        <a href="https://scholar.google.com/citations?user=zoMQ8CoAAAAJ&hl=en">Hanchen Yang</a>,
+                        <a href="https://scholar.google.com/citations?user=Uug6p-AAAAAJ&hl=en">Arijit Raychowdhury</a>,
+                        <a href="https://scholar.google.com/citations?user=P__ztgcAAAAJ&hl=en">Tushar Krishna</a>
+                        <br>
+                        Paper (To appear)
+                        <br>
+                        <p></p>
+                        <p>We propose REASON, an algorithm-system-architecture framework that accelerates the “slow-thinking” components of cognitive AI -- logical deduction, constraint solving, and probabilistic reasoning -- through common representation, reconfigurable architecture, and tight GPU integration for hybrid LLM + symbolic agentic workflows.</p>
+                        <br>
+                    </td>
+                </tr>
+                
                 <tr onmouseout="ff_stop()" onmouseover="ff_start()">
                     <td class="paper-image" style="width:20%;">
                         <div class="one"><img src='https://zishenwan.github.io/images/HPCA25_CogSys.png' width="200"></div>
@@ -353,7 +389,8 @@
                         <a href="https://scholar.google.com/citations?hl=en&user=lXUce-0AAAAJ">Arijit Raychowdhury</a>
                         <br>
                         <em>IEEE Transactions on Circuits and Systems for Artificial Intelligence (<strong>TCASAI</strong>)</em>, 2024
-                        <br><font color="red"><strong>Best Paper Award, DARPA SRC JUMP 2.0, 2024</strong></font><br>
+                        <br><font color="red"><strong>Best Paper Award, DARPA SRC JUMP 2.0, 2024</strong></font>
+                        <br><font color="red"><strong>Top-1 Most Cited Paper in all TCASAI Papers</strong></font><br>
                         <a href="https://zishenwan.github.io/publication/TCASAI24.pdf">Paper</a> / 
                         <a href="https://fortune.com/2024/12/09/neurosymbolic-ai-deep-learning-symbolic-reasoning-reliability/?khp389">Fortune News</a> / 
                         <a href="https://cocosys.ece.gatech.edu/2024/12/10/zishen-wan-research-scholar-spotlight-2/">CoCoSys News</a>
@@ -440,7 +477,7 @@
             <table class="paper-table"><tbody>
                 <tr onmouseout="ff_stop()" onmouseover="ff_start()">
                     <td class="paper-image" style="width:20%;">
-                        <div class="one"><img src='https://zishenwan.github.io/images/ASPLOS25_ReCA.png' width="200"></div>
+                        <div class="one"><img src='https://zishenwan.github.io/images/ASPLOS25_ReCA_v2.png' width="200"></div>
                         <script type="text/javascript">
                             function ff_start() {
                                 document.getElementById('ff_image').style.opacity = "1";
@@ -465,11 +502,12 @@
                         <a href="https://scholar.google.com/citations?user=gy4UVGcAAAAJ&hl=en">Vijay Janapa Reddi</a>
                         <br>
                         <em>ACM Inter Conf on Architectural Support for Programming Languages and Operating Systems (<strong>ASPLOS</strong>)</em>, 2025
-                        <br><font color="red"><strong>Selected as IAP Highlight</strong></font><br>
+                        <br><font color="red"><strong>Selected as Industry-Academia Partnership (IAP) Highlight</strong></font><br>
                         <a href="https://dl.acm.org/doi/pdf/10.1145/3676641.3716016">Paper</a> /
                         <a href="https://zishenwan.github.io/publication/2025-04-02_ASPLOS25_ReCA_slide.pdf">Slide</a> /
                         <a href="https://docs.google.com/presentation/d/1qnYi0ZFcN51e6u8QLhAqyv_bZt_xWSfQOVxnkDSfuiM/edit?usp=sharing">Slide (long version)</a> /
-                        <a href="https://zishenwan.github.io/publication/ASPLOS25_ReCA_Poster.pdf">Poster</a>
+                        <a href="https://zishenwan.github.io/publication/ASPLOS25_ReCA_Poster.pdf">Poster</a> /
+                        <a href="https://mp.weixin.qq.com/s/bnFKClWl0NyB0hIclxmwvQ">Media</a>
                         <br>
                         <p></p>
                         <p>We propose ReCA, a characterization and system-architecture co-design framework dedicated to cooperative embodied AI agent system acceleration, aiming to enhance both long-horizon multi-objective planning task efficiency and system scalability. </p>
