@@ -66,6 +66,7 @@
         <section>
             <h2>Recent News</h2>
             <ul>
+                <li><span class="news-date">01/21/2026</span>Our paper "A 40nm Programmable Heterogeneous SoC with RRAM/SRAM for Accelerating Neuro-Symbolic AI Models" accepted to <strong>JSSC</strong>.</li>
                 <li><span class="news-date">11/07/2025</span>Our paper "REASON: Accelerating Probabilistic Logical Reasoning for Neuro-Symbolic Cognitive Intelligence" accepted to <strong>HPCA 2026</strong>.</li>
                 <li><span class="news-date">06/25/2025</span>Our paper "Compositional AI Beyond LLMs: System Implications of Neuro-Symbolic-Probabilistic Architecture" accepted to <strong>ASPLOS 2026</strong>. [<a href="https://dl.acm.org/doi/pdf/10.1145/3760250.3762235">PDF</a>]</li>
                 <li><span class="news-date">04/15/2025</span>Our tutorial paper "Efficient Processing of Neuro-Symbolic AI: A Tutorial and Cross-Layer Co-Design Case Study" accepted to <strong>NeuS 2025</strong>. [<a href="https://neus-2025.github.io/files/papers/paper_68.pdf">PDF</a>]</li>
@@ -83,6 +84,7 @@
         <section>
             <h2>Recent Talks</h2>
             <ul>
+                <li><span class="news-date">10/20/2025</span> "Tailored Computing: Cross-Layer System, Architecture, and Silicon Co-Design for Physical Intelligence" at MICRO PhD Forum, Seoul, Korea.</li>
                 <li><span class="news-date">09/05/2025</span> "System Implications and Opportunities for Compositional Neuro-Symbolic-Probabilistic AI" at Georgia Tech (Host: Dr. Alexey Tumanov), Atlanta, GA.</li>
                 <li><span class="news-date">07/11/2025</span> "Demystifying Neuro-Symbolic AI for Software-Hardware Co-Design" at Purdue University (Host: Dr. Anand Raghunathan), West Lafayette, IN.</li>
                 <li><span class="news-date">07/10/2025</span> "Demystifying Neuro-Symbolic AI for Software-Hardware Co-Design" at University of Notre Dame (Host: Dr. Ningyuan Cao), South Bend, IN.</li>
@@ -125,7 +127,7 @@
                 First, we conduct workload characterization to uncover key system behavior of neuro-symbolic [<a href="https://zishenwan.github.io/publication/ISPASS24_NSAI.pdf">ISPASS'24</a>] and compositional LLM-symbolic-probabilistic [<a href="https://dl.acm.org/doi/pdf/10.1145/3760250.3762235">ASPLOS'26</a>] models. 
                 Second, we perform system optimization and build processing elements and dataflow architecture for neuro-symbolic computing [<a href="https://arxiv.org/pdf/2503.01162">HPCA'25</a>] and compositional LLM-symbolic-probabilistic computing [<a href="https://effi-nesy.github.io/">HPCA'26</a>]. 
                 Third, we develop end-to-end framework with automated architecture generator for agile neuro-symbolic FPGA deployment [<a href="https://arxiv.org/pdf/2504.19323">DAC'25</a>]. 
-                Finally, we tape out a programmable heterogeneous SoC chip with integrated RRAM/SRAM datapath, scheduler-informed power management, and programming support for neuro-symbolic AI models. 
+                Finally, we tape out a programmable heterogeneous SoC chip with integrated RRAM/SRAM datapath, scheduler-informed power management, and programming support for neuro-symbolic AI models [<a href="https://effi-nesy.github.io/">JSSC'26</a>]. 
                 Through this synergistic cross-layer co-design, we demonstrate the feasibility of deploying efficient neuro-symbolic cognitive systems at scale.
             </p>
                 We also explore employing neuro-symbolic computing in embodied AI systems by integrating high-level planning-reasoning and low-level perception-control modules. 
@@ -475,6 +477,46 @@
                     </td>
                 </tr>
             </tbody></table>
+            <h3>Chip Tapeout</h3>
+            <table class="paper-table"><tbody>
+                <tr onmouseout="ff_stop()" onmouseover="ff_start()">
+                    <td class="paper-image" style="width:20%;">
+                        <div class="one"><img src='https://zishenwan.github.io/images/JSSC26_NSAI.png' width="200"></div>
+                        <script type="text/javascript">
+                            function ff_start() {
+                                document.getElementById('ff_image').style.opacity = "1";
+                            }
+                            function ff_stop() {
+                                document.getElementById('ff_image').style.opacity = "0";
+                            }
+                            ff_stop()
+                        </script>
+                    </td>
+                    <td class="paper-content" style="width:80%;">
+                        <papertitle>A 40nm Programmable Heterogeneous SoC with 5.625MB/0.85MB RRAM/SRAM for Accelerating Neuro-Symbolic AI Models</papertitle>
+                        <br>
+                        <a href="https://scholar.google.com/citations?hl=en&user=_zZGO-4AAAAJ">Che-Kai Liu*</a>,
+                      <a href="https://zishenwan.github.io/">Zishen Wan*</a>,
+                      <a href="https://scholar.google.com/citations?user=vMQqKRoAAAAJ&hl=en">Young-Seok Noh</a>,
+                      <a href="https://profiles.utdallas.edu/mibrahim">Mohamed Ibrahim</a>,
+                      <a href="https://scholar.google.com/citations?user=pp2eO7UAAAAJ&hl=en">Samuel D. Spetalnick</a>,
+                      <a href="https://scholar.google.com/citations?hl=en&user=P__ztgcAAAAJ">Tushar Krishna</a>,
+                      <a href="https://scholar.google.com/citations?hl=en&user=jabbdXIAAAAJ">Win-San Khwa</a>,
+                      <a href="https://scholar.google.com/citations?hl=en&user=nlubVC8AAAAJ">Ashwin Sanjay Lele</a>,
+                      <a href="https://scholar.google.com/citations?user=RFJdHvsAAAAJ&hl=en">Yu-Der Chih</a>,
+                      <a href="https://scholar.google.com/citations?hl=en&user=7rcOEiIAAAAJ">Meng-Fan Chang</a>,
+                      <a href="https://scholar.google.com/citations?hl=en&user=lXUce-0AAAAJ">Arijit Raychowdhury</a>
+                        <br>
+                        <em>IEEE Journal of Solid-State Circuits (<strong>JSSC</strong>)</em>, 2026
+                        <br>Paper (To appear)
+                        <br>
+                        <p></p>
+                        <p>We tape out a fully programmable heterogeneous SoC that integrates RRAM/SRAM to efficiently accelerate a broad class of neuro-symbolic workloads. 
+                        The chip features integrated RRAM and SRAM neural-symbolic data paths, ultra-dense RRAM macros, scheduler-informed power management, and flexible programming support, demonstrating end-to-end silicon system for generalizable and efficient neuro-symbolic AI inference.</p>
+                    <br>
+                    </td>
+                </tr>
+                </tbody></table>
             <h3>Embodied System Deployment</h3>
             <table class="paper-table"><tbody>
                 <tr onmouseout="ff_stop()" onmouseover="ff_start()">
@@ -571,7 +613,7 @@
         </section>
     </div>
     <div class="footer">
-        &copy; Copyright - Zishen Wan 2025
+        &copy; Copyright - Zishen Wan 2026
     </div>
 </body>
 </html> 
